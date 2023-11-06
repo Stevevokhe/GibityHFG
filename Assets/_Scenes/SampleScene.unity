@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 222526742}
   - component: {fileID: 222526743}
   - component: {fileID: 222526744}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Item (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1051160629}
-  offset: {x: 2, y: 2, z: 0}
+  offset: {x: 0, y: 0, z: 0}
+  smoothTime: 0.5
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +690,7 @@ GameObject:
   - component: {fileID: 952583065}
   - component: {fileID: 952583066}
   - component: {fileID: 952583067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Item (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -943,7 +944,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -971,12 +972,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 7007670090121616740}
-  moveSpeed: 5
-  jumpForce: 7
+  moveSpeed: 7
+  jumpForce: 200
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  coinLayer:
+  itemLayer:
     serializedVersion: 2
     m_Bits: 64
   enemyLayer:
@@ -1297,7 +1298,7 @@ GameObject:
   - component: {fileID: 1742376513}
   - component: {fileID: 1742376514}
   - component: {fileID: 1742376515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1722,7 +1723,7 @@ GameObject:
   - component: {fileID: 1974440421}
   - component: {fileID: 1974440422}
   - component: {fileID: 1974440423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Item (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

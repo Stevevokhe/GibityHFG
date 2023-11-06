@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayer;
     [SerializeField]
-    private LayerMask coinLayer;
+    private LayerMask itemLayer;
     [SerializeField]
     private LayerMask enemyLayer;
 
@@ -37,19 +37,20 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+    }
 
-        // Check for collecting coins
-        Collider2D[] hitCoins = Physics2D.OverlapCircleAll(transform.position, 0.1f, coinLayer);
-        foreach (Collider2D coin in hitCoins)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.layer != itemLayer)
         {
-            CollectCoin(coin.gameObject);
+            CollectCoin(other.gameObject);
+            return;
         }
 
-        // Check for enemy collision
-        Collider2D hitEnemy = Physics2D.OverlapCircle(transform.position, 0.1f, enemyLayer);
-        if (hitEnemy != null)
+        if (other.gameObject.layer != enemyLayer)
         {
             PlayerDeath();
+            return;
         }
     }
 
