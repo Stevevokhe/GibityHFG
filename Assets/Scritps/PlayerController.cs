@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpForce = 7f;
-    public LayerMask groundLayer;
-    public LayerMask coinLayer;
-    public LayerMask enemyLayer;
+    [SerializeField]
+    private Transform groundCheck;
+    [SerializeField]
+    private float moveSpeed = 5f;
+    [SerializeField]
+    private float jumpForce = 7f;
+    [SerializeField]
+    private LayerMask groundLayer;
+    [SerializeField]
+    private LayerMask coinLayer;
+    [SerializeField]
+    private LayerMask enemyLayer;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -22,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Check for grounded state
-        isGrounded = Physics2D.OverlapCircle(transform.position, 0.1f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
         // Jump input
         if (isGrounded && Input.GetButtonDown("Jump"))
@@ -62,7 +70,6 @@ public class PlayerController : MonoBehaviour
 
     void PlayerDeath()
     {
-
         transform.position = Vector3.zero;
     }
 }
