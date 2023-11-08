@@ -7,11 +7,11 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Vector3 offset;
     [SerializeField]
-    private float smoothTime = 0.5f;
+    private float smoothTime = 2f;
 
     private Vector3 velocity = Vector3.zero;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (player == null)
         {
