@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Game");
     }
 
     public void ExitGame()
@@ -27,7 +27,6 @@ public class MenuManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-        PlayExitSound();
         Application.Quit();
 #endif
     }
