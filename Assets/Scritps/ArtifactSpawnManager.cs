@@ -45,6 +45,7 @@ public class ArtifactSpawnManager : MonoBehaviour
         SpawnArtifact(new Queue<ArtifactController>(simpleArtifacts), new Queue<Transform>(simpleSpawnPoints), usedSpawnPoints);
     }
 
+#if UNITY_EDITOR
     private void CheckData()
     {
         var spawnPoints = new HashSet<Transform>(simpleSpawnPoints);
@@ -57,6 +58,7 @@ public class ArtifactSpawnManager : MonoBehaviour
         if (specialArtifacts.Count + simpleArtifacts.Count > spawnPoints.Count)
             throw new Exception("There aren't enough spawn points");
     }
+#endif
 
     private void SpawnArtifact(ArtifactController artifact, List<Transform> spawnPoints, HashSet<Transform> usedSpawnPoints)
     {

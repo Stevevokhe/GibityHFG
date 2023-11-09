@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public static class ListExtension
 {
-    public static void Shuffle<T>(this List<T> list, int shuffleTime)
+    public static void Shuffle<T>(this IList<T> list, int shuffleTime)
     {
         while (shuffleTime > 0)
         {
