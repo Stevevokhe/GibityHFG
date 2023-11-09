@@ -11,13 +11,13 @@ public class CameraController : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (player == null)
         {
             return;
         }
         var targetPosition = new Vector3(player.position.x + offset.x, player.position.y + offset.y, transform.position.z + offset.z);
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime * Time.fixedDeltaTime);
     }
 }
