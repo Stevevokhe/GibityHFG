@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerAgeController : MonoBehaviour
+{
+    [Header("Age")]
+    [SerializeField]
+    [Min(10)]
+    private int minAge = 20;
+    [SerializeField]
+    private int maxAge = 70;
+    [SerializeField]
+    private float secondsPerAge = 5f;
+    [SerializeField]
+    private List<int> modelChangeAgeLimits = new();
+
+    public event EventHandler AgeTimerStarted;
+    public event EventHandler AgeTimerEnded;
+    public event EventHandler<int> RaiseModelChangeAtAge;
+    public event EventHandler MaxAgeLimitReached;
+
+    private int currentAge;
+    private Timer timer;
+
+    private void Awake()
+    {
+        if(minAge >= maxAge)
+        {
+            throw new Exception("MinAge can't be less or equal with MaxAge");
+        }
+        timer = Timer.Create(gameObject, nameof(PlayerAgeController), secondsPerAge, true, Timer.TimerMode.RealTime);
+        timer.Tick += TimerTick;
+        currentAge = minAge;
+    }
+
+    private void TimerTick(object sender, EventArgs e)
+    {
+        currentAge++;
+        if (modelChangeAgeLimits.Contains(currentAge))
+        {
+            RaiseModelChangeAtAge?.Invoke(this, currentAge);
+        }
+        if (currentAge == maxAge)
+        {
+            MaxAgeLimitReached?.Invoke(this, EventArgs.Empty);
+            StopTimer();
+        }
+    }
+
+    public void StartTimer()
+    {
+        timer.StartRunning();
+        AgeTimerStarted?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void StopTimer()
+    {
+        timer.StopRunning();
+        AgeTimerEnded?.Invoke(this, EventArgs.Empty);
+    }
+}

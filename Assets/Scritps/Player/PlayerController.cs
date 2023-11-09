@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerAgeController))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField]
     private Transform groundCheck;
     [SerializeField]
@@ -21,10 +24,21 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     private int collectedCoins = 0;
+    private PlayerAgeController playerAgeController;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerAgeController = GetComponent<PlayerAgeController>();
+        playerAgeController.AgeTimerEnded += (s, e) => Debug.Log("Age Timer Ended");
+        playerAgeController.AgeTimerStarted += (s, e) => Debug.Log("Age Timer Started");
+        playerAgeController.MaxAgeLimitReached += (s, e) => Debug.Log("Max Age Reached");
+        playerAgeController.RaiseModelChangeAtAge += (s, e) => Debug.Log($"Model Changed at: {e}");
+    }
+
+    private void Start()
+    {
+        playerAgeController.StartTimer();
     }
 
     private void Update()
