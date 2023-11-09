@@ -9,16 +9,21 @@ public class PlayerAgeController : MonoBehaviour
     [Min(10)]
     private int minAge = 20;
     [SerializeField]
+    [Min(11)]
     private int maxAge = 70;
     [SerializeField]
+    [Min(0)]
     private float secondsPerAge = 5f;
     [SerializeField]
     private List<int> modelChangeAgeLimits = new();
 
     public event EventHandler AgeTimerStarted;
-    public event EventHandler AgeTimerEnded;
+    public event EventHandler AgeTimerEnded; 
+    public event EventHandler<int> AgeChanged;
     public event EventHandler<int> RaiseModelChangeAtAge;
     public event EventHandler MaxAgeLimitReached;
+
+    public int MinAge => minAge;
 
     private int currentAge;
     private Timer timer;
@@ -27,7 +32,7 @@ public class PlayerAgeController : MonoBehaviour
     {
         if(minAge >= maxAge)
         {
-            throw new Exception("MinAge can't be less or equal with MaxAge");
+            throw new Exception("MinAge can't be greater (or equal) with MaxAge");
         }
         timer = Timer.Create(gameObject, nameof(PlayerAgeController), secondsPerAge, true, Timer.TimerMode.RealTime);
         timer.Tick += TimerTick;
@@ -37,6 +42,7 @@ public class PlayerAgeController : MonoBehaviour
     private void TimerTick(object sender, EventArgs e)
     {
         currentAge++;
+        AgeChanged?.Invoke(this, currentAge);
         if (modelChangeAgeLimits.Contains(currentAge))
         {
             RaiseModelChangeAtAge?.Invoke(this, currentAge);
