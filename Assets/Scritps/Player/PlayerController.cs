@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Dependencies.Sqlite;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -23,8 +21,23 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded;
-    private int collectedCoins = 0;
+    private int points = 0;
     private PlayerAgeController playerAgeController;
+
+    public event EventHandler<int> ChangedPoints;
+
+    public int Points
+    {
+        get => points;
+        set
+        {
+            if (points == value)
+                return;
+
+            points = value;
+            ChangedPoints?.Invoke(this, points);
+        }
+    }
 
     private void Awake()
     {
@@ -55,13 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.layer != itemLayer)
-        {
-            CollectCoin(other.gameObject);
-            return;
-        }
-
-        if (other.gameObject.layer != enemyLayer)
+        if (other.gameObject.layer == enemyLayer)
         {
             PlayerDeath();
             return;
@@ -76,14 +83,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
     }
 
-    void CollectCoin(GameObject coin)
-    {
-        // Perform coin collection logic here
-        collectedCoins++;
-        Destroy(coin);
-    }
-
-    void PlayerDeath()
+    private void PlayerDeath()
     {
         transform.position = Vector3.zero;
     }

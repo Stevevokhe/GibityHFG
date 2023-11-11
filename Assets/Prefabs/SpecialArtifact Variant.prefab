@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpecialArtifact Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4051440606974764999, guid: ca8fe5941c49743499c063e1bd90f66a, type: 3}
+      propertyPath: point
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5705786657476747139, guid: ca8fe5941c49743499c063e1bd90f66a, type: 3}
       propertyPath: m_Color.g
       value: 1
