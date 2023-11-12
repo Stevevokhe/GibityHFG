@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -23,8 +24,10 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private int points = 0;
     private PlayerAgeController playerAgeController;
+    private HashSet<Key> keys = new();
 
     public event EventHandler<int> ChangedPoints;
+    public event EventHandler<Key> AddedNewKey;
 
     public int Points
     {
@@ -81,6 +84,20 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         Vector2 moveDirection = new Vector2(horizontalInput, 0);
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
+    }
+
+    public void AddKey(Key key)
+    {
+        if (!keys.Contains(key))
+        {
+            keys.Add(key);
+            AddedNewKey?.Invoke(this, key);
+        }
+    }
+
+    public bool HasKey(Key key)
+    {
+        return keys.Contains(key);
     }
 
     private void PlayerDeath()

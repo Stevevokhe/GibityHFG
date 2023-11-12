@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Collider2D))]
 public abstract class Item : MonoBehaviour
 {
     protected virtual void OnTriggerEnter2D(Collider2D collision)
