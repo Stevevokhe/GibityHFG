@@ -34,7 +34,7 @@ public class PlayerAgeController : MonoBehaviour
         {
             throw new Exception("MinAge can't be greater (or equal) with MaxAge");
         }
-        timer = Timer.Create(gameObject, nameof(PlayerAgeController), secondsPerAge, true, Timer.TimerMode.RealTime);
+        timer = Timer.Create(gameObject, nameof(PlayerAgeController), secondsPerAge, true);
         timer.Tick += TimerTick;
         currentAge = minAge;
     }

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    private MenuSettingsUI settingsUI;
+    private OptionsUI settingsUI;
 
     private void Awake()
     {

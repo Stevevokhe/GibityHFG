@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuSettingsUI : MonoBehaviour
+public class OptionsUI : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField]
@@ -13,7 +13,7 @@ public class MenuSettingsUI : MonoBehaviour
     private Slider sfxVolumeSlider;
     [Header("Other")]
     [SerializeField]
-    private AudioSource menuMusicAudioSource;
+    private AudioSource musicAudioSource;
 
     private bool isInited = false;
     private float musicVolume = 1f;
@@ -37,11 +37,11 @@ public class MenuSettingsUI : MonoBehaviour
         {
             throw new ArgumentNullException(nameof(sfxVolumeSlider));
         }
-        if (menuMusicAudioSource == null)
+        if (musicAudioSource == null)
         {
             throw new ArgumentNullException(nameof(sfxVolumeSlider));
         }
-        musicVolume = menuMusicAudioSource.volume;
+        musicVolume = musicAudioSource.volume;
         isInited = true;
     }
 
@@ -52,7 +52,7 @@ public class MenuSettingsUI : MonoBehaviour
 
         masterVolumeSlider.value = SavingManager.Instance.GetMasterVolume(1);
         musicVolumeSlider.value = SavingManager.Instance.GetMusicVolume(1);
-        menuMusicAudioSource.volume = musicVolumeSlider.value;
+        musicAudioSource.volume = musicVolumeSlider.value;
         sfxVolumeSlider.value = SavingManager.Instance.GetSFXVolume(1);
     }
 
@@ -61,7 +61,7 @@ public class MenuSettingsUI : MonoBehaviour
         if (!isInited)
             Init();
 
-        menuMusicAudioSource.volume = musicVolumeSlider.value * masterVolumeSlider.value * musicVolume;
+        musicAudioSource.volume = musicVolumeSlider.value * masterVolumeSlider.value * musicVolume;
 
         SavingManager.Instance.SetMasterVolume(masterVolumeSlider.value);
         SavingManager.Instance.Save();
@@ -72,7 +72,7 @@ public class MenuSettingsUI : MonoBehaviour
         if (!isInited)
             Init();
 
-        menuMusicAudioSource.volume = musicVolumeSlider.value * masterVolumeSlider.value * musicVolume;
+        musicAudioSource.volume = musicVolumeSlider.value * masterVolumeSlider.value * musicVolume;
 
         SavingManager.Instance.SetMusicVolume(musicVolumeSlider.value);
         SavingManager.Instance.Save();
