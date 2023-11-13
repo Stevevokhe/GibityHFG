@@ -9,6 +9,9 @@ public interface IPlatformSavingManager
     void DeleteSavedData();
 
     #region Volume
+    void SetMasterVolume(float value);
+
+    float GetMasterVolume(float defaultValue);
 
     void SetMusicVolume(float value);
 

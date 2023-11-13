@@ -43,17 +43,26 @@ public class LocalSavingManager : IPlatformSavingManager
     #endregion
 
     #region Volume
-    public virtual void SetMusicVolume(float value) => SetLocalValue(SavingManagerType.MusicVolume, value);
+    public virtual void SetMasterVolume(float value) => 
+        SetLocalValue(SavingManagerType.MasterVolume, value);
 
-    public virtual float GetMusicVolume(float defaultValue) => GetLocalValue(SavingManagerType.MusicVolume, defaultValue);
+    public virtual float GetMasterVolume(float defaultValue) => 
+        GetLocalValue(SavingManagerType.MasterVolume, defaultValue);
 
-    public virtual void SetSFXVolume(float value) => SetLocalValue(SavingManagerType.SFXVolume, value);
+    public virtual void SetMusicVolume(float value) => 
+        SetLocalValue(SavingManagerType.MusicVolume, value);
 
-    public virtual float GetSFXVolume(float defaultValue) => GetLocalValue(SavingManagerType.SFXVolume, defaultValue);
+    public virtual float GetMusicVolume(float defaultValue) => 
+        GetLocalValue(SavingManagerType.MusicVolume, defaultValue);
+
+    public virtual void SetSFXVolume(float value) => 
+        SetLocalValue(SavingManagerType.SFXVolume, value);
+
+    public virtual float GetSFXVolume(float defaultValue) => 
+        GetLocalValue(SavingManagerType.SFXVolume, defaultValue);
     #endregion
 
     #region GameProgress
-
     public virtual void SetGameProgress(GameProgress gameProgress, Action<SavingManagerResponseStatus> callback)
     {
         SetLocalValue(SavingManagerType.GameProgress, JsonConvert.SerializeObject(gameProgress));
