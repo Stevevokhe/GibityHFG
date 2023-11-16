@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     private AudioClip jumpSound;
     [SerializeField]
     private AudioClip[] steepSounds;
+    [SerializeField]
+    [Min(0)]
+    private float minSpeedFortheStepSound = 0.1f;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -118,7 +121,7 @@ public class PlayerController : MonoBehaviour
         Vector2 moveDirection = new Vector2(horizontalInput, 0);
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
 
-        if(isGrounded && !isWaitingForNextStepSound)
+        if(isGrounded && !isWaitingForNextStepSound && minSpeedFortheStepSound <= Mathf.Abs(moveDirection.x))
         {
             audioSource.clip = steepSounds[stepSoundIndex];
             audioSource.Play();
