@@ -20,6 +20,14 @@ public class GameInterfaceController : MonoBehaviour
         pausePanel.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0.0f;
