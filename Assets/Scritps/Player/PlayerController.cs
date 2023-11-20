@@ -3,6 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class Era
+{
+    [Min(0)]
+    public int age;
+    [Min(0)]
+    public float moveSpeed;
+    [Min(0)]
+    public float jumpForce;
+    public Vector2 size;
+}
+
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(PlayerAgeController))]
@@ -11,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField]
     private Transform groundCheck;
+    [SerializeField]
+    private List<Era> eras;
     [SerializeField]
     private float moveSpeed = 5f;
     [SerializeField]
@@ -64,7 +78,7 @@ public class PlayerController : MonoBehaviour
         playerAgeController.AgeTimerEnded += (s, e) => Debug.Log("Age Timer Ended");
         playerAgeController.AgeTimerStarted += (s, e) => Debug.Log("Age Timer Started");
         playerAgeController.MaxAgeLimitReached += (s, e) => Debug.Log("Max Age Reached");
-        playerAgeController.RaiseModelChangeAtAge += (s, e) => Debug.Log($"Model Changed at: {e}");
+        playerAgeController.AgeChanged += ChangedAge;
 
         if (jumpSound == null)
             throw new Exception($"{name}: the {nameof(jumpSound)} can't be null.");
@@ -97,6 +111,20 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         CheckMoveInput();
+    }
+
+    private void ChangedAge(object sender, int age)
+    {
+        foreach(var era in eras)
+        {
+            if(era.age == age)
+            {
+                moveSpeed = era.moveSpeed;
+                jumpForce = era.jumpForce;
+                transform.localScale = new Vector3 (era.size.x, era.size.y, 1f);
+                return;
+            }
+        }
     }
 
     private void CheckGrounded()
