@@ -54,6 +54,7 @@ public class OptionsUI : MonoBehaviour
         musicVolumeSlider.value = SavingManager.Instance.GetMusicVolume(1);
         musicAudioSource.volume = musicVolumeSlider.value;
         sfxVolumeSlider.value = SavingManager.Instance.GetSFXVolume(1);
+        musicAudioSource.volume = musicVolumeSlider.value * masterVolumeSlider.value * musicVolume;
     }
 
     public void SetMasterVolume()
