@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAgeController : MonoBehaviour
@@ -14,16 +13,15 @@ public class PlayerAgeController : MonoBehaviour
     [SerializeField]
     [Min(0)]
     private float secondsPerAge = 5f;
-    [SerializeField]
-    private List<int> modelChangeAgeLimits = new();
 
     public event EventHandler AgeTimerStarted;
     public event EventHandler AgeTimerEnded; 
     public event EventHandler<int> AgeChanged;
-    public event EventHandler<int> RaiseModelChangeAtAge;
     public event EventHandler MaxAgeLimitReached;
 
     public int MinAge => minAge;
+
+    public int CurrentAge => currentAge;
 
     private int currentAge;
     private Timer timer;
@@ -43,10 +41,6 @@ public class PlayerAgeController : MonoBehaviour
     {
         currentAge++;
         AgeChanged?.Invoke(this, currentAge);
-        if (modelChangeAgeLimits.Contains(currentAge))
-        {
-            RaiseModelChangeAtAge?.Invoke(this, currentAge);
-        }
         if (currentAge == maxAge)
         {
             MaxAgeLimitReached?.Invoke(this, EventArgs.Empty);
