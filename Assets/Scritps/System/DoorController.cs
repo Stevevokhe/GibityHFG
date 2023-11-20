@@ -11,8 +11,6 @@ public class DoorController : MonoBehaviour
     {
         if (key == null)
             throw new System.Exception(name + ": key is missing.");
-
-        GetComponent<SpriteRenderer>().color = key.ColorValue;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
