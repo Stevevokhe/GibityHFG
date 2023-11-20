@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private OptionsUI settingsUI;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        if(settingsUI == null)
+        {
+            throw new System.ArgumentNullException(nameof(settingsUI));
+        }
+
+        settingsUI.LoadAllSettings();
     }
 
     public void StartGame()
