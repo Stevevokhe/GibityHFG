@@ -39,7 +39,7 @@ public class OptionsUI : MonoBehaviour
         }
         if (musicAudioSource == null)
         {
-            throw new ArgumentNullException(nameof(sfxVolumeSlider));
+            throw new ArgumentNullException(nameof(musicAudioSource));
         }
         musicVolume = musicAudioSource.volume;
         isInited = true;
