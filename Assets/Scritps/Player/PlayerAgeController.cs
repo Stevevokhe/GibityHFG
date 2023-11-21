@@ -40,8 +40,13 @@ public class PlayerAgeController : MonoBehaviour
     private void TimerTick(object sender, EventArgs e)
     {
         currentAge++;
+        InvokeAgeChanged();
+    }
+
+    private void InvokeAgeChanged()
+    {
         AgeChanged?.Invoke(this, currentAge);
-        if (currentAge == maxAge)
+        if (currentAge >= maxAge)
         {
             MaxAgeLimitReached?.Invoke(this, EventArgs.Empty);
             StopTimer();
@@ -58,5 +63,11 @@ public class PlayerAgeController : MonoBehaviour
     {
         timer.StopRunning();
         AgeTimerEnded?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void AddAge(int age)
+    {
+        currentAge += age;
+        InvokeAgeChanged();
     }
 }

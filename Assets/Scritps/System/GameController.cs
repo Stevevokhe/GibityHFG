@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -6,6 +7,8 @@ public class GameController : MonoBehaviour
     private PlayerController player;
     [SerializeField]
     private Transform startPoint;
+
+    public event EventHandler PlayerCaught;
 
     private void Awake()
     {
@@ -16,5 +19,12 @@ public class GameController : MonoBehaviour
             throw new System.Exception($"{name}: startPoint can't be null.");
 
         player.transform.position = startPoint.position;
+        player.Caught += TeleportPlayerToStartPoint;
+    }
+
+    private void TeleportPlayerToStartPoint(object sender, EventArgs e)
+    {
+        player.transform.position = startPoint.position;
+        PlayerCaught?.Invoke(this, EventArgs.Empty);
     }
 }

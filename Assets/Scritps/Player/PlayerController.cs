@@ -53,9 +53,11 @@ public class PlayerController : MonoBehaviour
     private HashSet<Key> keys = new();
     private bool isWaitingForNextStepSound = false;
     private int stepSoundIndex = 0;
+    private bool isOld;
 
     public event EventHandler<int> ChangedPoints;
     public event EventHandler<Key> AddedNewKey;
+    public event EventHandler Caught;
 
     public int Points
     {
@@ -99,12 +101,21 @@ public class PlayerController : MonoBehaviour
         CheckJumpInput();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.layer == enemyLayer)
+        if (collision.gameObject.CompareTag(Tag.Enemy))
         {
-            PlayerDeath();
-            return;
+            if (isOld)
+            {
+                return;
+            }
+
+            if (collision.gameObject.TryGetComponent<EnemyController>(out var enemy))
+            {
+                playerAgeController.AddAge(enemy.PrisonTime);
+            }
+
+            Caught?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -181,10 +192,5 @@ public class PlayerController : MonoBehaviour
     public bool HasKey(Key key)
     {
         return keys.Contains(key);
-    }
-
-    private void PlayerDeath()
-    {
-        transform.position = Vector3.zero;
     }
 }
