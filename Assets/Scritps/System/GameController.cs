@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Transform startPoint;
 
+    public event EventHandler PlayerCaught;
+
     private void Awake()
     {
         if (player == null)
@@ -23,5 +25,6 @@ public class GameController : MonoBehaviour
     private void TeleportPlayerToStartPoint(object sender, EventArgs e)
     {
         player.transform.position = startPoint.position;
+        PlayerCaught?.Invoke(this, EventArgs.Empty);
     }
 }
