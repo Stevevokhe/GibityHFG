@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private HashSet<Key> keys = new();
     private bool isWaitingForNextStepSound = false;
     private int stepSoundIndex = 0;
+    private bool isOld;
 
     public event EventHandler<int> ChangedPoints;
     public event EventHandler<Key> AddedNewKey;
@@ -101,10 +102,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == enemyLayer)
+        if (other.gameObject.CompareTag(Tag.Enemy))
         {
-            PlayerDeath();
-            return;
+            if(isOld)
+            {
+                return;
+            }
+
+
         }
     }
 
@@ -181,10 +186,5 @@ public class PlayerController : MonoBehaviour
     public bool HasKey(Key key)
     {
         return keys.Contains(key);
-    }
-
-    private void PlayerDeath()
-    {
-        transform.position = Vector3.zero;
     }
 }
