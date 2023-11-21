@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -15,6 +16,12 @@ public class GameController : MonoBehaviour
         if (startPoint == null)
             throw new System.Exception($"{name}: startPoint can't be null.");
 
+        player.transform.position = startPoint.position;
+        player.Caught += TeleportPlayerToStartPoint;
+    }
+
+    private void TeleportPlayerToStartPoint(object sender, EventArgs e)
+    {
         player.transform.position = startPoint.position;
     }
 }

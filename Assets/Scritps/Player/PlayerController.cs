@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     public event EventHandler<int> ChangedPoints;
     public event EventHandler<Key> AddedNewKey;
+    public event EventHandler Caught;
 
     public int Points
     {
@@ -100,16 +101,21 @@ public class PlayerController : MonoBehaviour
         CheckJumpInput();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.CompareTag(Tag.Enemy))
+        if (collision.gameObject.CompareTag(Tag.Enemy))
         {
-            if(isOld)
+            if (isOld)
             {
                 return;
             }
 
+            if (collision.gameObject.TryGetComponent<EnemyController>(out var enemy))
+            {
+                playerAgeController.AddAge(enemy.PrisonTime);
+            }
 
+            Caught?.Invoke(this, EventArgs.Empty);
         }
     }
 

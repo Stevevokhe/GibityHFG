@@ -11,10 +11,14 @@ public class EnemyController : MonoBehaviour
     private float speed = 2f;
     [SerializeField]
     private Vector2 closeToTarget = new(0.1f, 2f);
+    [SerializeField]
+    private int prisonTime = 5; 
 
     private int targetIndex;
     private bool canMove;
     private int modifier;
+
+    public int PrisonTime => prisonTime;
 
     private void Awake()
     {
