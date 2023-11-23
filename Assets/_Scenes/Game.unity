@@ -27414,6 +27414,9 @@ MonoBehaviour:
   player: {fileID: 2063222703}
   offset: {x: 0, y: 0, z: 0}
   smoothTime: 0.5
+  useBoundary: 1
+  minBoundary: {x: 13.5, y: -7}
+  maxBoundary: {x: 129.5, y: 30}
 --- !u!82 &467123094
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27631,6 +27634,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 862740253619202316, guid: 6d97f2760a69b844bb13db25b62b7ce3, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 68414582}
     - target: {fileID: 1996712581743261701, guid: 6d97f2760a69b844bb13db25b62b7ce3, type: 3}
       propertyPath: player
       value: 
