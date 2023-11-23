@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2063222705}
   startPoint: {fileID: 302218869}
+  gameMusic: {fileID: 467123094}
 --- !u!4 &68414583
 Transform:
   m_ObjectHideFlags: 0
@@ -27631,6 +27632,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 862740253619202316, guid: 6d97f2760a69b844bb13db25b62b7ce3, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 68414582}
     - target: {fileID: 1996712581743261701, guid: 6d97f2760a69b844bb13db25b62b7ce3, type: 3}
       propertyPath: player
       value: 

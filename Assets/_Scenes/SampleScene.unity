@@ -1722,6 +1722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1051160632}
   startPoint: {fileID: 286307252}
+  gameMusic: {fileID: 519420034}
 --- !u!4 &1395004159
 Transform:
   m_ObjectHideFlags: 0

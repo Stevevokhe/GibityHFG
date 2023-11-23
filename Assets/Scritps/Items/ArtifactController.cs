@@ -17,6 +17,8 @@ public class ArtifactController : Item
         audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         artifactCollider = GetComponent<Collider2D>();
+
+        audioSource.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetSFXVolume(1);
     }
 
     protected override void TouchPlayer(PlayerController player)
