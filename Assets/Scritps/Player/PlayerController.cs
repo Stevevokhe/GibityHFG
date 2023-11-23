@@ -87,6 +87,8 @@ public class PlayerController : MonoBehaviour
 
         if (steepSounds == null || steepSounds.Length == 0)
             throw new Exception($"{name}: the {nameof(steepSounds)} can't be empty.");
+
+        audioSource.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetSFXVolume(1);
     }
 
     private void Start()
