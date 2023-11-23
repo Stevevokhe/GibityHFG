@@ -27415,6 +27415,9 @@ MonoBehaviour:
   player: {fileID: 2063222703}
   offset: {x: 0, y: 0, z: 0}
   smoothTime: 0.5
+  useBoundary: 1
+  minBoundary: {x: 13.5, y: -7}
+  maxBoundary: {x: 129.5, y: 30}
 --- !u!82 &467123094
 AudioSource:
   m_ObjectHideFlags: 0
