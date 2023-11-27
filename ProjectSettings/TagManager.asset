@@ -46,3 +46,6 @@ TagManager:
   - name: Card
     uniqueID: 1269139515
     locked: 0
+  - name: Walls
+    uniqueID: 3446898253
+    locked: 0
