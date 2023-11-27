@@ -9,7 +9,7 @@ public class GameInterfaceController : MonoBehaviour
     [SerializeField]
     private GameObject pausePanel;
     [SerializeField]
-    private GameObject prisonPanel;
+    private PrisonPanel prisonPanel;
     [SerializeField]
     private GameController gameController;
 
@@ -28,7 +28,7 @@ public class GameInterfaceController : MonoBehaviour
             throw new System.Exception($"{name}: {nameof(gameController)} can't be null");
 
         pausePanel.SetActive(false);
-        gameController.PlayerCaught += (s, e) => StartPrison();
+        gameController.PlayerCaught += StartPrison;
     }
 
     private void Update()
@@ -68,12 +68,12 @@ public class GameInterfaceController : MonoBehaviour
     public void EndPrison()
     {
         Time.timeScale = 1.0f;
-        prisonPanel.SetActive(false);
+        prisonPanel.Hide();
     }
 
-    public void StartPrison()
+    public void StartPrison(object sender, int lostYears)
     {
         Time.timeScale = 0.0f;
-        prisonPanel.SetActive(true);
+        prisonPanel.Show(lostYears);
     }
 }

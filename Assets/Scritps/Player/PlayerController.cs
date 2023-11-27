@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     public event EventHandler Win;
     public event EventHandler Lose;
     public event EventHandler<Key> AddedNewKey;
-    public event EventHandler Caught;
+    public event EventHandler<int> Caught;
 
     public int Points
     {
@@ -92,6 +92,11 @@ public class PlayerController : MonoBehaviour
         audioSource.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetSFXVolume(1);
     }
 
+    public void Start()
+    {
+        playerAgeController.StartTimer();
+    }
+
     private void Update()
     {
         CheckGrounded();
@@ -113,18 +118,13 @@ public class PlayerController : MonoBehaviour
                 playerAgeController.AddAge(enemy.PrisonTime);
             }
 
-            Caught?.Invoke(this, EventArgs.Empty);
+            Caught?.Invoke(this, enemy.PrisonTime);
         }
     }
 
     private void FixedUpdate()
     {
         CheckMoveInput();
-    }
-
-    public void StartTimer()
-    {
-        playerAgeController.StartTimer();
     }
 
     private void ChangedAge(object sender, int age)

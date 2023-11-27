@@ -12,7 +12,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private AudioSource gameMusic;
 
-    public event EventHandler PlayerCaught;
+    public event EventHandler<int> PlayerCaught;
+
+    public float GoalPoint => goalPoint;
 
     private void Awake()
     {
@@ -26,14 +28,14 @@ public class GameController : MonoBehaviour
             throw new System.Exception($"{name}: {nameof(gameMusic)} can't be null.");
 
         player.transform.position = startPoint.position;
-        player.Caught += TeleportPlayerToStartPoint;
+        player.Caught += CatchedPlayer;
 
         gameMusic.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetMusicVolume(1);
     }
 
-    private void TeleportPlayerToStartPoint(object sender, EventArgs e)
+    private void CatchedPlayer(object sender, int e)
     {
         player.transform.position = startPoint.position;
-        PlayerCaught?.Invoke(this, EventArgs.Empty);
+        PlayerCaught?.Invoke(this, e);
     }
 }
