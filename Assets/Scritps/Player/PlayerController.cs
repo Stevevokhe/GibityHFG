@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour
     private bool isOld;
 
     public event EventHandler<int> ChangedPoints;
+    public event EventHandler Win;
+    public event EventHandler Lose;
     public event EventHandler<Key> AddedNewKey;
     public event EventHandler Caught;
 
@@ -69,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
             points = value;
             ChangedPoints?.Invoke(this, points);
+            Win?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -77,9 +80,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         playerAgeController = GetComponent<PlayerAgeController>();
-        playerAgeController.AgeTimerEnded += (s, e) => Debug.Log("Age Timer Ended");
-        playerAgeController.AgeTimerStarted += (s, e) => Debug.Log("Age Timer Started");
-        playerAgeController.MaxAgeLimitReached += (s, e) => Debug.Log("Max Age Reached");
+        playerAgeController.MaxAgeLimitReached += (s, e) => Lose?.Invoke(this, EventArgs.Empty);
         playerAgeController.AgeChanged += ChangedAge;
 
         if (jumpSound == null)
@@ -89,11 +90,6 @@ public class PlayerController : MonoBehaviour
             throw new Exception($"{name}: the {nameof(steepSounds)} can't be empty.");
 
         audioSource.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetSFXVolume(1);
-    }
-
-    private void Start()
-    {
-        playerAgeController.StartTimer();
     }
 
     private void Update()
@@ -124,6 +120,11 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         CheckMoveInput();
+    }
+
+    public void StartTimer()
+    {
+        playerAgeController.StartTimer();
     }
 
     private void ChangedAge(object sender, int age)

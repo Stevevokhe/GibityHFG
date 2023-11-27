@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private PlayerController player;
     [SerializeField]
+    private float goalPoint = 4;
+    [SerializeField]
     private Transform startPoint;
     [SerializeField]
     private AudioSource gameMusic;
