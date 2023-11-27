@@ -56,8 +56,7 @@ public class PlayerController : MonoBehaviour
     private bool isOld;
 
     public event EventHandler<int> ChangedPoints;
-    public event EventHandler Win;
-    public event EventHandler Lose;
+    public event EventHandler Died;
     public event EventHandler<Key> AddedNewKey;
     public event EventHandler<int> Caught;
 
@@ -71,7 +70,6 @@ public class PlayerController : MonoBehaviour
 
             points = value;
             ChangedPoints?.Invoke(this, points);
-            Win?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -80,7 +78,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         playerAgeController = GetComponent<PlayerAgeController>();
-        playerAgeController.MaxAgeLimitReached += (s, e) => Lose?.Invoke(this, EventArgs.Empty);
+        playerAgeController.MaxAgeLimitReached += (s, e) => Died?.Invoke(this, EventArgs.Empty);
         playerAgeController.AgeChanged += ChangedAge;
 
         if (jumpSound == null)
@@ -181,7 +179,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(waitingTime);
         isWaitingForNextStepSound = false;
     }
-
 
     public void AddKey(Key key)
     {

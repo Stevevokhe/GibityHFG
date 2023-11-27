@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     private AudioSource gameMusic;
 
     public event EventHandler<int> PlayerCaught;
+    public event EventHandler WonGame;
+    public event EventHandler LostGame;
+
 
     public float GoalPoint => goalPoint;
 
@@ -29,6 +32,8 @@ public class GameController : MonoBehaviour
 
         player.transform.position = startPoint.position;
         player.Caught += CatchedPlayer;
+        player.ChangedPoints += ChangedPoint;
+        player.Died += (s,e) => LostGame?.Invoke(this, EventArgs.Empty);
 
         gameMusic.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetMusicVolume(1);
     }
@@ -37,5 +42,13 @@ public class GameController : MonoBehaviour
     {
         player.transform.position = startPoint.position;
         PlayerCaught?.Invoke(this, e);
+    }
+
+    private void ChangedPoint(object sender, int points)
+    {
+        if(points >= goalPoint)
+        {
+            WonGame?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

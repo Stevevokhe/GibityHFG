@@ -17,7 +17,7 @@ public class PrisonPanel : MonoBehaviour
 
     public void Show(int lostYears)
     {
-        displayText.text = $"You lost {lostYears} years in your life. You should be more careful.";
+        displayText.text = $"You lost {lostYears} years in your life. You don't want to fail in front of the scale, do you?";
         gameObject.SetActive(true);
     }
 
