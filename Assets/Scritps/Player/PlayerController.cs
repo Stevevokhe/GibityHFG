@@ -102,16 +102,16 @@ public class PlayerController : MonoBehaviour
         CheckJumpInput();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(Tag.Enemy))
+        if (collision.CompareTag(Tag.Enemy))
         {
             if (isOld)
             {
                 return;
             }
 
-            if (collision.gameObject.TryGetComponent<EnemyController>(out var enemy))
+            if (collision.TryGetComponent<EnemyController>(out var enemy))
             {
                 playerAgeController.AddAge(enemy.PrisonTime);
             }
