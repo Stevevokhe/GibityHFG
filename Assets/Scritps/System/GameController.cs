@@ -16,7 +16,6 @@ public class GameController : MonoBehaviour
     public event EventHandler WonGame;
     public event EventHandler LostGame;
 
-
     public float GoalPoint => goalPoint;
 
     private void Awake()
@@ -50,5 +49,10 @@ public class GameController : MonoBehaviour
         {
             WonGame?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    public void TeleportPlayer(Transform transform)
+    {
+        player.transform.position = transform.position;
     }
 }
