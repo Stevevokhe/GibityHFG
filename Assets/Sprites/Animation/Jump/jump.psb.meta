@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 1c1d5a88766e4c947a867242d2a2175d
-=======
 guid: 67897f497e8aee34eaad6626f5841fe4
->>>>>>> c5296af (open door sprite used)
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -109,11 +105,7 @@ ScriptedImporter:
       y: 140
       width: 80
       height: 126
-<<<<<<< HEAD
-    spriteID: c09ec1f622a87f44a8b0d4a8181bbf29
-=======
     spriteID: e52eb090e02e1ce479706d986665b78a
->>>>>>> c5296af (open door sprite used)
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -134,11 +126,7 @@ ScriptedImporter:
       y: 274
       width: 78
       height: 126
-<<<<<<< HEAD
-    spriteID: e97636bc0c797a3459cf8110e16ba1fc
-=======
     spriteID: fdf9f8d1bbe665e4fb9366b57001f5aa
->>>>>>> c5296af (open door sprite used)
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -159,11 +147,7 @@ ScriptedImporter:
       y: 4
       width: 128
       height: 128
-<<<<<<< HEAD
-    spriteID: fbb53ea9fb88e5647b9eec5ce44a49be
-=======
     spriteID: b8ecf93c364985b47a0ee18fad519ee9
->>>>>>> c5296af (open door sprite used)
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -211,11 +195,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-<<<<<<< HEAD
-    spriteID: 1e19c585fa6076d44ab7aa416c526b6a
-=======
     spriteID: 8435766974a941f4a85410dba752aa82
->>>>>>> c5296af (open door sprite used)
     layerID: 19
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -225,11 +205,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 0
     parentIndex: 0
-<<<<<<< HEAD
-    spriteID: c151b8e7a7f27fa4e8bb15d3829d9699
-=======
     spriteID: 5e2e4a3d0d17a074c8c66bee2664c57f
->>>>>>> c5296af (open door sprite used)
     layerID: 18
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -239,11 +215,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 0
     parentIndex: 0
-<<<<<<< HEAD
-    spriteID: 6c65ce4d0511d5a4bb58b43fbd671d9e
-=======
     spriteID: e3112a490960bd8479839e0779501c9a
->>>>>>> c5296af (open door sprite used)
     layerID: 17
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -253,11 +225,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-<<<<<<< HEAD
-    spriteID: b7ef2da1b7e4f064e8abf8e4c34da9a5
-=======
     spriteID: 8b70cd919b411764cb01a2c87c48349a
->>>>>>> c5296af (open door sprite used)
     layerID: 15
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -267,11 +235,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 0
     parentIndex: 3
-<<<<<<< HEAD
-    spriteID: 27e75c41eb3487f4295cb5ac1b9247e0
-=======
     spriteID: 7f589493f8d2fa6489d80e95570a19b7
->>>>>>> c5296af (open door sprite used)
     layerID: 14
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -281,11 +245,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 0
     parentIndex: 3
-<<<<<<< HEAD
-    spriteID: af6a6325970508143839f3808efd81b7
-=======
     spriteID: 180376a1c2f463343b8bd8344e1fb151
->>>>>>> c5296af (open door sprite used)
     layerID: 13
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -295,11 +255,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-<<<<<<< HEAD
-    spriteID: 40ea15bf4e7ee0c4cbd6df49e43eabe6
-=======
     spriteID: 52ccf8a0233c7a342962a63722f3ed0c
->>>>>>> c5296af (open door sprite used)
     layerID: 11
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -309,11 +265,7 @@ ScriptedImporter:
     spriteName: Layer 4
     isGroup: 0
     parentIndex: 6
-<<<<<<< HEAD
-    spriteID: c09ec1f622a87f44a8b0d4a8181bbf29
-=======
     spriteID: e52eb090e02e1ce479706d986665b78a
->>>>>>> c5296af (open door sprite used)
     layerID: 10
     mosaicPosition: {x: 4, y: 140}
     flatten: 0
@@ -323,11 +275,7 @@ ScriptedImporter:
     spriteName: Layer 3
     isGroup: 0
     parentIndex: 6
-<<<<<<< HEAD
-    spriteID: e97636bc0c797a3459cf8110e16ba1fc
-=======
     spriteID: fdf9f8d1bbe665e4fb9366b57001f5aa
->>>>>>> c5296af (open door sprite used)
     layerID: 9
     mosaicPosition: {x: 4, y: 274}
     flatten: 0
@@ -337,11 +285,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 1
     parentIndex: -1
-<<<<<<< HEAD
-    spriteID: cb4b7aaf5ee650a4c9623acba38e383b
-=======
     spriteID: 0ea6a131f7c61dc46b7b6e87082cd0b0
->>>>>>> c5296af (open door sprite used)
     layerID: 7
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -351,11 +295,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 0
     parentIndex: 9
-<<<<<<< HEAD
-    spriteID: 80bc1aeed0be7da49ad661e4387c50dd
-=======
     spriteID: 68e533d23b0ccca41af3f531a68d9dd8
->>>>>>> c5296af (open door sprite used)
     layerID: 5
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -365,11 +305,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 0
     parentIndex: 9
-<<<<<<< HEAD
-    spriteID: dd0069c337a9afb4d82689a381b0573c
-=======
     spriteID: ce3e2d96bba988a4da751b83b6b8c9d4
->>>>>>> c5296af (open door sprite used)
     layerID: 6
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -379,11 +315,7 @@ ScriptedImporter:
     spriteName: 
     isGroup: 0
     parentIndex: -1
-<<<<<<< HEAD
-    spriteID: 233ec04ac13e28d4b8ecbdea30fe3568
-=======
     spriteID: 3433d93a5f6af184ea62beb33c6f5783
->>>>>>> c5296af (open door sprite used)
     layerID: 4
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
@@ -393,11 +325,7 @@ ScriptedImporter:
     spriteName: Background
     isGroup: 0
     parentIndex: -1
-<<<<<<< HEAD
-    spriteID: fbb53ea9fb88e5647b9eec5ce44a49be
-=======
     spriteID: b8ecf93c364985b47a0ee18fad519ee9
->>>>>>> c5296af (open door sprite used)
     layerID: 1
     mosaicPosition: {x: 4, y: 4}
     flatten: 0
