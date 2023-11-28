@@ -201,9 +201,10 @@ public class PlayerController : MonoBehaviour
     {
         float move = rb.velocity.x / moveSpeed;
         float absMove = Mathf.Abs(move);
+        float absJump = rb.velocity.y / moveSpeed;
         animator.SetFloat(SpeedId, absMove);
 
-        if(absMove < minSpeed)
+        if(absMove < minSpeed && absJump < minSpeed)
             audioSource.volume = 0;
 
         if (move > minSpeed)
