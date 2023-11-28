@@ -173,12 +173,20 @@ public class GameInterfaceController : MonoBehaviour
 
     public void ShowTeleportButton(Transform transform)
     {
+        if (teleportImage == null)
+        {
+            return;
+        }
         teleportImage.SetActive(true);
         teleportText.SetCurrentTarget(transform);
     }
 
     public void HideTeleportButton()
     {
+        if(teleportImage == null)
+        {
+            return;
+        }
         teleportImage.SetActive(false);
     }
 }
