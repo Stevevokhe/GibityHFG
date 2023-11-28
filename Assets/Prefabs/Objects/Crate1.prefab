@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3071976868967683019}
   - component: {fileID: 686231872853550078}
   - component: {fileID: 156606932873035241}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Crate1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ MonoBehaviour:
   - {x: 1.0207405, y: -0.9489603, z: 0}
   m_ShapePathHash: 154489205
   m_Mesh: {fileID: 0}
-  m_InstanceId: 31006
+  m_InstanceId: 51068
   m_LocalBounds:
     m_Center: {x: -0.00040245056, y: -0.014997959, z: 0}
     m_Extent: {x: 1.0364475, y: 0.94735193, z: 0}

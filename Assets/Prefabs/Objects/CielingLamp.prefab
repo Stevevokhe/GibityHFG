@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6901914537001663895}
   - component: {fileID: 6241349039188521335}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5948989990696467887}
   - component: {fileID: 2514974827070311932}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ImportedAssets_43 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 908064226514959208}
   - component: {fileID: 933682688019610021}
   - component: {fileID: 7254700809496431284}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CielingLamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7780558708989117634}
   - component: {fileID: 6260208311016497635}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ImportedAssets_43
   m_TagString: Untagged
   m_Icon: {fileID: 0}
