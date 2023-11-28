@@ -7,9 +7,11 @@ public class PointDisplay : MonoBehaviour
     [SerializeField]
     private PlayerController player;
     [SerializeField]
+    private GameController gameController;
+    [SerializeField]
     private TextMeshProUGUI displayText;
 
-    private const string pointText = "Points: ";
+    private const string pointText = "Points";
 
     private void Awake()
     {
@@ -17,16 +19,20 @@ public class PointDisplay : MonoBehaviour
         {
             throw new ArgumentNullException(nameof(player));
         }
+        if (gameController == null)
+        {
+            throw new ArgumentNullException(nameof(gameController));
+        }
         player.ChangedPoints += UpdatePoints;
     }
 
     private void Start()
     {
-        displayText.text = pointText + player.Points;
+        UpdatePoints(this, 0);
     }
 
     private void UpdatePoints(object sender, int newPoints)
     {
-        displayText.text = pointText + newPoints;
+        displayText.text = $"{pointText}: {newPoints}/{gameController.GoalPoint}";
     }
 }

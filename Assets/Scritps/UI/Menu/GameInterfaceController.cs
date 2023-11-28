@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,7 +10,13 @@ public class GameInterfaceController : MonoBehaviour
     [SerializeField]
     private GameObject pausePanel;
     [SerializeField]
-    private GameObject prisonPanel;
+    private GameObject startPanel;
+    [SerializeField]
+    private GameObject winPanel;
+    [SerializeField]
+    private GameObject losePanel;
+    [SerializeField]
+    private PrisonPanel prisonPanel;
     [SerializeField]
     private GameController gameController;
 
@@ -24,11 +31,28 @@ public class GameInterfaceController : MonoBehaviour
         if (prisonPanel == null)
             throw new System.Exception($"{name}: {nameof(prisonPanel)} can't be null");
 
-        if(gameController == null)
+        if (startPanel == null)
+            throw new System.Exception($"{name}: {nameof(startPanel)} can't be null");
+
+        if (winPanel == null)
+            throw new System.Exception($"{name}: {nameof(winPanel)} can't be null");
+
+        if (losePanel == null)
+            throw new System.Exception($"{name}: {nameof(losePanel)} can't be null");
+
+        if (gameController == null)
             throw new System.Exception($"{name}: {nameof(gameController)} can't be null");
 
         pausePanel.SetActive(false);
-        gameController.PlayerCaught += (s, e) => StartPrison();
+        gameController.PlayerCaught += StartPrison;
+        gameController.LostGame += LostGame;
+        gameController.WonGame += WonGame;
+    }
+
+    private void Start()
+    {
+        Time.timeScale = 0.0f;
+        startPanel.SetActive(true);
     }
 
     private void Update()
@@ -37,6 +61,12 @@ public class GameInterfaceController : MonoBehaviour
         {
             PauseGame();
         }
+    }
+
+    public void StartGame()
+    {
+        startPanel.SetActive(false);
+        Time.timeScale = 1.0f;
     }
 
     public void PauseGame()
@@ -68,12 +98,24 @@ public class GameInterfaceController : MonoBehaviour
     public void EndPrison()
     {
         Time.timeScale = 1.0f;
-        prisonPanel.SetActive(false);
+        prisonPanel.Hide();
     }
 
-    public void StartPrison()
+    public void StartPrison(object sender, int lostYears)
     {
         Time.timeScale = 0.0f;
-        prisonPanel.SetActive(true);
+        prisonPanel.Show(lostYears);
+    }
+
+    private void WonGame(object sender, EventArgs e)
+    {
+        Time.timeScale = 0.0f;
+        winPanel.SetActive(true);
+    }
+
+    private void LostGame(object sender, EventArgs e)
+    {
+        Time.timeScale = 0.0f;
+        losePanel.SetActive(true);
     }
 }

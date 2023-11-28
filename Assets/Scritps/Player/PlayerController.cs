@@ -56,8 +56,9 @@ public class PlayerController : MonoBehaviour
     private bool isOld;
 
     public event EventHandler<int> ChangedPoints;
+    public event EventHandler Died;
     public event EventHandler<Key> AddedNewKey;
-    public event EventHandler Caught;
+    public event EventHandler<int> Caught;
 
     public int Points
     {
@@ -77,9 +78,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         playerAgeController = GetComponent<PlayerAgeController>();
-        playerAgeController.AgeTimerEnded += (s, e) => Debug.Log("Age Timer Ended");
-        playerAgeController.AgeTimerStarted += (s, e) => Debug.Log("Age Timer Started");
-        playerAgeController.MaxAgeLimitReached += (s, e) => Debug.Log("Max Age Reached");
+        playerAgeController.MaxAgeLimitReached += (s, e) => Died?.Invoke(this, EventArgs.Empty);
         playerAgeController.AgeChanged += ChangedAge;
 
         if (jumpSound == null)
@@ -91,7 +90,7 @@ public class PlayerController : MonoBehaviour
         audioSource.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetSFXVolume(1);
     }
 
-    private void Start()
+    public void Start()
     {
         playerAgeController.StartTimer();
     }
@@ -103,21 +102,21 @@ public class PlayerController : MonoBehaviour
         CheckJumpInput();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(Tag.Enemy))
+        if (collision.CompareTag(Tag.Enemy))
         {
             if (isOld)
             {
                 return;
             }
 
-            if (collision.gameObject.TryGetComponent<EnemyController>(out var enemy))
+            if (collision.TryGetComponent<EnemyController>(out var enemy))
             {
                 playerAgeController.AddAge(enemy.PrisonTime);
             }
 
-            Caught?.Invoke(this, EventArgs.Empty);
+            Caught?.Invoke(this, enemy.PrisonTime);
         }
     }
 
@@ -180,7 +179,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(waitingTime);
         isWaitingForNextStepSound = false;
     }
-
 
     public void AddKey(Key key)
     {
