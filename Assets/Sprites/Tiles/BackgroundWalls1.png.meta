@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 211a38f901916f24e92df66fb428aee6
+=======
+guid: 7ebe536edb8fde641a673823df6904cb
+>>>>>>> c5296af (open door sprite used)
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -107,6 +111,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+<<<<<<< HEAD
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -120,6 +125,8 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+=======
+>>>>>>> c5296af (open door sprite used)
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0

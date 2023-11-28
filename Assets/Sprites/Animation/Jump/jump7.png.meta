@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 967ed89fdda8ffc4eb17ff566b00e099
+=======
+guid: 52732650591d003449f6834989f65c0a
+>>>>>>> c5296af (open door sprite used)
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +52,11 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   spritePixelsToUnits: 120
+=======
+  spritePixelsToUnits: 100
+>>>>>>> c5296af (open door sprite used)
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -107,6 +115,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+<<<<<<< HEAD
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -120,6 +129,8 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+=======
+>>>>>>> c5296af (open door sprite used)
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
