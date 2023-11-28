@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [Serializable]
@@ -41,9 +42,15 @@ public class PlayerController : MonoBehaviour
     private AudioClip jumpSound;
     [SerializeField]
     private AudioClip[] steepSounds;
+
+    [Header("Animation")]
+    [SerializeField]
+    private Animator animator;
+    [SerializeField]
+    private Transform animationContainer;
     [SerializeField]
     [Min(0)]
-    private float minSpeedFortheStepSound = 0.1f;
+    private float minSpeedForRun = 0.1f;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -59,6 +66,9 @@ public class PlayerController : MonoBehaviour
     public event EventHandler Died;
     public event EventHandler<Key> AddedNewKey;
     public event EventHandler<int> Caught;
+
+    private const string SpeedId = "Speed";
+    private const string IsGroundedId = "IsGrounded";
 
     public int Points
     {
@@ -86,6 +96,12 @@ public class PlayerController : MonoBehaviour
 
         if (steepSounds == null || steepSounds.Length == 0)
             throw new Exception($"{name}: the {nameof(steepSounds)} can't be empty.");
+
+        if (animator == null)
+            throw new Exception($"{name}: the {nameof(animator)} can't be null.");
+
+        if (animationContainer == null)
+            throw new Exception($"{name}: the {nameof(animationContainer)} can't be null.");
 
         audioSource.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetSFXVolume(1);
     }
@@ -125,6 +141,11 @@ public class PlayerController : MonoBehaviour
         CheckMoveInput();
     }
 
+    private void LateUpdate()
+    {
+        FixAnimation();
+    }
+
     private void ChangedAge(object sender, int age)
     {
         foreach(var era in eras)
@@ -142,6 +163,7 @@ public class PlayerController : MonoBehaviour
     private void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        animator.SetBool(IsGroundedId, isGrounded);
     }
 
     private void CheckJumpInput()
@@ -161,7 +183,7 @@ public class PlayerController : MonoBehaviour
         Vector2 moveDirection = new Vector2(horizontalInput, 0);
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
 
-        if(isGrounded && !isWaitingForNextStepSound && minSpeedFortheStepSound <= Mathf.Abs(moveDirection.x))
+        if(isGrounded && !isWaitingForNextStepSound && minSpeedForRun <= Mathf.Abs(moveDirection.x))
         {
             audioSource.clip = steepSounds[stepSoundIndex];
             audioSource.Play();
@@ -171,6 +193,22 @@ public class PlayerController : MonoBehaviour
             if (stepSoundIndex >= steepSounds.Length)
                 stepSoundIndex = 0;
         }
+    }
+
+    private void FixAnimation()
+    {
+        float move = Mathf.Abs(rb.velocity.x);
+        animator.SetFloat(SpeedId, move > minSpeedForRun ? 1f : 0f);
+
+        if (move > minSpeedForRun)
+            animationContainer.localScale = new Vector3(-1, 1, 1);
+        else
+            animationContainer.localScale = new Vector3(1, 1, 1);
+
+        if (rb.velocity.x > 0)
+            transform.localScale = new Vector3(1, 1, 1);
+        else if (rb.velocity.x < 0)
+            transform.localScale = new Vector3(-1, 1, 1);
     }
 
     private IEnumerator WaitingForNextStepSound(float waitingTime)
