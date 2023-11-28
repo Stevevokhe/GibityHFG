@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +12,7 @@ public class Era
     [Min(0)]
     public float jumpForce;
     public Vector2 size;
+    public bool isOld;
 }
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -41,9 +41,16 @@ public class PlayerController : MonoBehaviour
     private AudioClip jumpSound;
     [SerializeField]
     private AudioClip[] steepSounds;
+
+    [Header("Animation")]
     [SerializeField]
-    [Min(0)]
-    private float minSpeedFortheStepSound = 0.1f;
+    private Animator animator;
+    [SerializeField]
+    private PlayerAnimationEventController animationEventController;
+    [SerializeField]
+    [Range(0,1)]
+    [Tooltip("For rotation and sounds. It is percentage.")]
+    private float minSpeed = 0.25f;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -51,14 +58,18 @@ public class PlayerController : MonoBehaviour
     private PlayerAgeController playerAgeController;
     private AudioSource audioSource;
     private HashSet<Key> keys = new();
-    private bool isWaitingForNextStepSound = false;
     private int stepSoundIndex = 0;
     private bool isOld;
+    private float volume;
+    private Vector3 scale;
 
     public event EventHandler<int> ChangedPoints;
     public event EventHandler Died;
     public event EventHandler<Key> AddedNewKey;
     public event EventHandler<int> Caught;
+
+    private const string SpeedId = "Speed";
+    private const string IsGroundedId = "IsGrounded";
 
     public int Points
     {
@@ -87,7 +98,17 @@ public class PlayerController : MonoBehaviour
         if (steepSounds == null || steepSounds.Length == 0)
             throw new Exception($"{name}: the {nameof(steepSounds)} can't be empty.");
 
+        if (animator == null)
+            throw new Exception($"{name}: the {nameof(animator)} can't be null.");
+
+        if (animationEventController == null)
+            throw new Exception($"{name}: the {nameof(animationEventController)} can't be null.");
+
         audioSource.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetSFXVolume(1);
+        volume = audioSource.volume;
+        scale = transform.localScale;
+
+        animationEventController.Step += UseStepSound;
     }
 
     public void Start()
@@ -125,23 +146,36 @@ public class PlayerController : MonoBehaviour
         CheckMoveInput();
     }
 
+    private void LateUpdate()
+    {
+        FixAnimation();
+    }
+
     private void ChangedAge(object sender, int age)
     {
+        Era selectEra = null;
         foreach(var era in eras)
         {
-            if(era.age == age)
+            if(era.age <= age && (selectEra == null || era.age > selectEra.age))
             {
-                moveSpeed = era.moveSpeed;
-                jumpForce = era.jumpForce;
-                transform.localScale = new Vector3 (era.size.x, era.size.y, 1f);
-                return;
+                selectEra = era;
             }
+        }
+
+        if(selectEra != null)
+        {
+            moveSpeed = selectEra.moveSpeed;
+            jumpForce = selectEra.jumpForce;
+            transform.localScale = new Vector3(selectEra.size.x, selectEra.size.y, transform.localScale.z);
+            scale = transform.localScale;
+            isOld = selectEra.isOld;
         }
     }
 
     private void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        animator.SetBool(IsGroundedId, isGrounded);
     }
 
     private void CheckJumpInput()
@@ -149,6 +183,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             audioSource.clip = jumpSound;
+            audioSource.volume = volume;
             audioSource.Play();
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -160,24 +195,32 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         Vector2 moveDirection = new Vector2(horizontalInput, 0);
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
-
-        if(isGrounded && !isWaitingForNextStepSound && minSpeedFortheStepSound <= Mathf.Abs(moveDirection.x))
-        {
-            audioSource.clip = steepSounds[stepSoundIndex];
-            audioSource.Play();
-            StartCoroutine(WaitingForNextStepSound(audioSource.clip.length));
-
-            ++stepSoundIndex;
-            if (stepSoundIndex >= steepSounds.Length)
-                stepSoundIndex = 0;
-        }
     }
 
-    private IEnumerator WaitingForNextStepSound(float waitingTime)
+    private void FixAnimation()
     {
-        isWaitingForNextStepSound = true;
-        yield return new WaitForSeconds(waitingTime);
-        isWaitingForNextStepSound = false;
+        float move = rb.velocity.x / moveSpeed;
+        float absMove = Mathf.Abs(move);
+        animator.SetFloat(SpeedId, absMove);
+
+        if(absMove < minSpeed)
+            audioSource.volume = 0;
+
+        if (move > minSpeed)
+            transform.localScale = scale;
+        else if (move < -minSpeed)
+            transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
+    }
+
+    private void UseStepSound(object sender, EventArgs e)
+    {
+        audioSource.clip = steepSounds[stepSoundIndex];
+        audioSource.volume = volume;
+        audioSource.Play();
+
+        ++stepSoundIndex;
+        if (stepSoundIndex >= steepSounds.Length)
+            stepSoundIndex = 0;
     }
 
     public void AddKey(Key key)
