@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 3986452916558526080}
   - component: {fileID: 7516348764060257213}
   - component: {fileID: 827619456160420379}
+  - component: {fileID: 725988803893179675}
   m_Layer: 0
   m_Name: Animations
   m_TagString: Untagged
@@ -58,11 +59,11 @@ Transform:
   m_GameObject: {fileID: 928374046765329905}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.049999952, y: 0, z: 0}
+  m_LocalPosition: {x: 0.05, y: 0, z: 0}
   m_LocalScale: {x: 0.09, y: 0.09, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5753918975758796065}
+  m_Father: {fileID: 8304202159045565760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7516348764060257213
 SpriteRenderer:
@@ -137,38 +138,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &6532953244666504832
-GameObject:
+--- !u!114 &725988803893179675
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5753918975758796065}
-  m_Layer: 0
-  m_Name: AnimationContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5753918975758796065
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6532953244666504832}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3986452916558526080}
-  m_Father: {fileID: 8304202159045565760}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 928374046765329905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6251a8b31c6cb1b4c9591edbfad91639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7345609984718752817
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,11 +182,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1462263586170611852}
-  - {fileID: 5753918975758796065}
+  - {fileID: 3986452916558526080}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6568580575697788587
@@ -431,8 +412,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 1462263586170611852}
-  eras: []
-  moveSpeed: 7
+  eras:
+  - age: 40
+    moveSpeed: 6
+    jumpForce: 10
+    size: {x: 1.5, y: 1.5}
+    isOld: 0
+  - age: 60
+    moveSpeed: 5
+    jumpForce: 2
+    size: {x: 1.5, y: 1.5}
+    isOld: 1
+  moveSpeed: 5
   jumpForce: 10
   groundLayer:
     serializedVersion: 2
@@ -448,8 +439,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e6d54d7ddffd0e04c9d85a0f29dd9eba, type: 3}
   - {fileID: 8300000, guid: afce81aef5f8e874f9c5a347d06c742c, type: 3}
   animator: {fileID: 827619456160420379}
-  animationContainer: {fileID: 5753918975758796065}
-  minSpeedForRun: 0.1
+  animationEventController: {fileID: 725988803893179675}
+  minSpeed: 0.25
 --- !u!114 &5842250064962797774
 MonoBehaviour:
   m_ObjectHideFlags: 0
