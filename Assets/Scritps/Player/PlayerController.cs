@@ -62,11 +62,13 @@ public class PlayerController : MonoBehaviour
     private bool isOld;
     private float volume;
     private Vector3 scale;
+    private Era selectedEra = null;
 
     public event EventHandler<int> ChangedPoints;
     public event EventHandler Died;
     public event EventHandler<Key> AddedNewKey;
     public event EventHandler<int> Caught;
+    public event EventHandler GotOlder;
 
     private const string SpeedId = "Speed";
     private const string IsGroundedId = "IsGrounded";
@@ -153,22 +155,24 @@ public class PlayerController : MonoBehaviour
 
     private void ChangedAge(object sender, int age)
     {
-        Era selectEra = null;
+        Era newEra = null;
         foreach(var era in eras)
         {
-            if(era.age <= age && (selectEra == null || era.age > selectEra.age))
+            if(era.age <= age && (newEra == null || era.age > newEra.age))
             {
-                selectEra = era;
+                newEra = era;
             }
         }
 
-        if(selectEra != null)
+        if(newEra != null && selectedEra != newEra)
         {
-            moveSpeed = selectEra.moveSpeed;
-            jumpForce = selectEra.jumpForce;
-            transform.localScale = new Vector3(selectEra.size.x, selectEra.size.y, transform.localScale.z);
+            GotOlder?.Invoke(this, EventArgs.Empty);
+            selectedEra = newEra;
+            moveSpeed = selectedEra.moveSpeed;
+            jumpForce = selectedEra.jumpForce;
+            transform.localScale = new Vector3(selectedEra.size.x, selectedEra.size.y, transform.localScale.z);
             scale = transform.localScale;
-            isOld = selectEra.isOld;
+            isOld = selectedEra.isOld;
         }
     }
 
