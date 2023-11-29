@@ -94,8 +94,7 @@ public class GameInterfaceController : MonoBehaviour
     }
 
     public void StartGame()
-    {
-        startPanel.SetActive(false);
+    {        
         Time.timeScale = 1.0f;
     }
 
