@@ -4723,7 +4723,6 @@ GameObject:
   - component: {fileID: 2219551948025206748}
   - component: {fileID: 5253175021361181546}
   - component: {fileID: 467542299991098202}
-  - component: {fileID: 6111746172320782928}
   m_Layer: 5
   m_Name: OlderDisplay
   m_TagString: Untagged
@@ -4789,21 +4788,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6111746172320782928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6266209964309555327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f74592e64ce1e0642be4773ecbb20485, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  gameController: {fileID: 0}
-  displayText: {fileID: 1758334617282074888}
 --- !u!1 &6374374887894385361
 GameObject:
   m_ObjectHideFlags: 0
