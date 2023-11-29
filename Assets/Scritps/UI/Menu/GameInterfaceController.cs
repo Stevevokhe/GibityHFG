@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,12 @@ public class GameInterfaceController : MonoBehaviour
     private TeleportTextMeshProUGUI teleportText;
     [SerializeField]
     private GameObject teleportImage;
+    [SerializeField]
+    private GameObject olderPanel;
+    [SerializeField]
+    [Min(0)]
+    [Tooltip("In Seconds.")]
+    private float olderPanelShowTime = 3f;
 
     private Animator doorTeleportAnimator;
 
@@ -64,6 +71,9 @@ public class GameInterfaceController : MonoBehaviour
         if (teleportImage == null)
             throw new Exception($"{name}: {nameof(teleportImage)} can't be null");
 
+        if (olderPanel == null)
+            throw new Exception($"{name}: {nameof(olderPanel)} can't be null");
+
         doorTeleportAnimator = doorTeleportFadeAnimationController.GetComponent<Animator>();
         doorTeleportFadeAnimationController.FadeInEnded += FadeInEnded;
         doorTeleportFadeAnimationController.FadeOutEnded += FadeOutEnded;
@@ -71,6 +81,7 @@ public class GameInterfaceController : MonoBehaviour
         gameController.PlayerCaught += StartPrison;
         gameController.LostGame += LostGame;
         gameController.WonGame += WonGame;
+        gameController.PlayerGotOlder += ShowOlderPanel;
 
         Instance = this;
     }
@@ -187,5 +198,20 @@ public class GameInterfaceController : MonoBehaviour
             return;
         }
         teleportImage.SetActive(false);
+    }
+
+    private void ShowOlderPanel(object sender, EventArgs e)
+    {
+        if (olderPanelShowTime <= 0)
+            return;
+
+        olderPanel.SetActive(true);
+        StartCoroutine(HideOlderPanel());
+    }
+
+    private IEnumerator HideOlderPanel()
+    {
+        yield return new WaitForSeconds(olderPanelShowTime);
+        olderPanel.SetActive(false);
     }
 }

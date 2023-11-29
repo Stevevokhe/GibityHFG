@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public event EventHandler<int> PlayerCaught;
     public event EventHandler WonGame;
     public event EventHandler LostGame;
+    public event EventHandler PlayerGotOlder;
 
     public float GoalPoint => goalPoint;
 
@@ -33,6 +34,7 @@ public class GameController : MonoBehaviour
         player.Caught += CatchedPlayer;
         player.ChangedPoints += ChangedPoint;
         player.Died += (s,e) => LostGame?.Invoke(this, EventArgs.Empty);
+        player.GotOlder += (s, e) => PlayerGotOlder?.Invoke(this, EventArgs.Empty);
 
         gameMusic.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetMusicVolume(1);
     }
