@@ -49,3 +49,6 @@ TagManager:
   - name: Walls
     uniqueID: 3446898253
     locked: 0
+  - name: Enemy
+    uniqueID: 1143002243
+    locked: 0
