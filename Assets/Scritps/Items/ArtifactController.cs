@@ -33,6 +33,6 @@ public class ArtifactController : Item
     private IEnumerator WaitForDestroy(float waitingTimeForDestroy)
     {
         yield return new WaitForSeconds(waitingTimeForDestroy);
-        GameObject.Destroy(gameObject);
+        GameObject.Destroy(gameObject.transform.parent.gameObject);
     }
 }
