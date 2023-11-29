@@ -1,21 +1,29 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(AudioSource))]
 public class ArtifactController : Item
 {
     [SerializeField]
     private int point = 1;
-
+    [SerializeField]
     private AudioSource audioSource;
+    [SerializeField]
     private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private GameObject lightObject;
+
     private Collider2D artifactCollider;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (audioSource == null)
+            throw new Exception($"{name}: the {nameof(audioSource)} can't be null.");
+        if (spriteRenderer == null)
+            throw new Exception($"{name}: the {nameof(spriteRenderer)} can't be null.");
+        if (lightObject == null)
+            throw new Exception($"{name}: the {nameof(lightObject)} can't be null.");
+
         artifactCollider = GetComponent<Collider2D>();
 
         audioSource.volume *= SavingManager.Instance.GetMasterVolume(1) * SavingManager.Instance.GetSFXVolume(1);
@@ -26,6 +34,7 @@ public class ArtifactController : Item
         player.Points += point;
         spriteRenderer.enabled = false;
         artifactCollider.enabled = false;
+        lightObject.SetActive(false);
         audioSource.Play();
         StartCoroutine(WaitForDestroy(audioSource.clip.length));
     }
@@ -33,6 +42,6 @@ public class ArtifactController : Item
     private IEnumerator WaitForDestroy(float waitingTimeForDestroy)
     {
         yield return new WaitForSeconds(waitingTimeForDestroy);
-        GameObject.Destroy(gameObject.transform.parent.gameObject);
+        GameObject.Destroy(gameObject);
     }
 }
