@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: bfcf70c72007ecb4aa29371892fa04c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03ffdbbcbd7984640a1acdd57b8f6ffe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 9105348455487611991}
   - component: {fileID: 8322417344674768255}
   m_Layer: 6
-  m_Name: Artifact
+  m_Name: Artifact 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
