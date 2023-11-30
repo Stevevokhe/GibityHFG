@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You lost 99 years in your life. You don't want to fail in front of the
+  m_text: You lost 99 years of your life. You don't want to fail in front of the
     scale, do you?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ec3c22a6310fe6648ab3b3e733d75020, type: 2}
